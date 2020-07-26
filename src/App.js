@@ -9,6 +9,7 @@ import { Button, Carousel } from "react-bootstrap";
 import { Nav, Navbar, Form, NavDropdown, FormControl } from "react-bootstrap";
 import Pagination from "react-js-pagination";
 import Range from './components/Range'
+import CircleLoader from "react-spinners/CircleLoader";
 
 
 
@@ -65,7 +66,9 @@ export default function App() {
         let a = originList.sort((a, b) => {
             return a.popularity - b.popularity
         })
+        .map(x => x)
         console.log("LowToHigh")
+        console.log(a)
         setMovieList(a)
 
     }
@@ -73,6 +76,7 @@ export default function App() {
     function highToLow() {
         let a = originList.sort((a, b) => b.popularity - a.popularity)
         console.log("HighToLow")
+        console.log(a)
         setMovieList(a)
     }
 
@@ -81,7 +85,9 @@ export default function App() {
         let a = originList.sort((a, b) => {
             return a.vote_average - b.vote_average
         })
+        .map(x => x)
         console.log("LowToHighR")
+        console.log(a)
         setMovieList(a)
 
     }
@@ -89,6 +95,7 @@ export default function App() {
     function highToLowR() {
         let a = originList.sort((a, b) => b.vote_average - a.vote_average)
         console.log("HighToLowR")
+        console.log(a)
         setMovieList(a)
     }
 
