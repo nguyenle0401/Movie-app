@@ -88,9 +88,9 @@ export default function App() {
                 <div className="container mx-auto my-4 py-4">
                     <div className="row justify-content-center text-center">
                         <div>
-                            {movieList.map(item => {
+                            {/* {movieList.map(item => {
                                 return (<MovieCard movie={item} />)
-                            })}
+                            })} */}
                             <MovieBoard movieList={movieList} />
                             {movieList.map(item => {
                                 return (<Carousel movie={item} />)
