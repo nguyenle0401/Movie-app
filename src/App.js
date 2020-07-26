@@ -62,14 +62,18 @@ export default function App() {
         let a = originList.sort((a,b) =>{
          return a.popularity - b.popularity
         })
+        .map(x => x)
         console.log("LowToHigh")
+        console.log(a)
         setMovieList(a)
 
     }
 
     function highToLow(){
         let a = originList.sort((a,b) => b.popularity - a.popularity)
+        .map(x => x)
         console.log("HighToLow")
+        console.log(a)
         setMovieList(a)
     }
 
