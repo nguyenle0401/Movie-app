@@ -58,12 +58,19 @@ export default function App() {
         callTopRateMovies();
     }
 
-    function highToLow(){
-        movieList.sort((a,b) => a.popularity - b.popularity)
+    function lowToHigh(){
+        let a = originList.sort((a,b) =>{
+         return a.popularity - b.popularity
+        })
+        console.log("LowToHigh")
+        setMovieList(a)
+
     }
 
-    function lowToHigh(){
-        movieList.sort((a,b) => b.popularity - a.popularity)
+    function highToLow(){
+        let a = originList.sort((a,b) => b.popularity - a.popularity)
+        console.log("HighToLow")
+        setMovieList(a)
     }
 
 

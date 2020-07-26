@@ -9,63 +9,25 @@ export default function MovieBoard(props) {
   if (movieList.length % 4 !== 0) numberOfRows++;
   console.log(numberOfRows)
   var rowsArray = Array.from(Array(numberOfRows).keys())
-
+  console.log("ahhadf")
   return (
     <Container fluid>
-      {() => {
-        if (movieList.length > 3) {
-          return rowsArray.map((_, i) => {
+      {
+        movieList.length > 3?rowsArray.map((_, i) => {
+            let subArr = movieList.slice(i*4, i*4 + 4);
+            console.log(subArr)
             return <Row>
-              <Col>
-                <div>
-                  {movieList.map((item, index) => {
-                    if (index === i * 4)
-                      return <MovieCard movie={item} />;
-                    else return null;
-                  })}
-                </div>
-              </Col>
-              <Col>
-                <div>
-                  {movieList.map((item, index) => {
-                    if (index === i * 4 + 1)
-                      return <MovieCard movie={item} />;
-                    else return null;
-                  })}
-                </div>
-              </Col>
-              <Col>
-                <div>
-                  {movieList.map((item, index) => {
-                    if (index === i * 4 + 2)
-                      return <MovieCard movie={item} />;
-                    else return null;
-                  })}
-                </div>
-              </Col>
-              <Col>
-                <div>
-                  {movieList.map((item, index) => {
-                    if (index === i * 4 + 3)
-                      return <MovieCard movie={item} />;
-                    else return null;
-                  })}
-                </div>
-              </Col>
-            </Row>
+                      {subArr.map((item) =>  <Col><MovieCard movie={item} /></Col>)}
+                  </Row>
           })
-        }
-        else {
-          return <Row>
+        : <Row>
             {movieList.map((item) => {
               return <Col>
                 <MovieCard movie={item} />
               </Col>
             })}
           </Row>
-
-        }
-      }}
+      }
     </Container>
   );
 }
