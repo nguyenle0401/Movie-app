@@ -6,11 +6,19 @@
 .style-title{
   font-size: 80px;
   font-weight: bolder;
-  font-family: fantasy;
-  color: rgb(21, 183, 223);
+  font-family: 'Times New Roman', Times, serif;
+  color: rgb(241, 247, 248);
 
 }
 .body-bg{
   background-color: rgb(3, 5, 5);
+}
+.header-fixed {
+  position: fixed !important;
+  width:100%;
+  z-index: 10;
+  
+  /* top: 0px; display:none;
+  background-color:white; */
 }
 
