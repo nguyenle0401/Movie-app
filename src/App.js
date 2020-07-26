@@ -5,9 +5,11 @@ import './App.css';
 import MovieCard from './components/MovieCard'
 import MovieBoard from './components/MovieBoard'
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "react-bootstrap";
-// import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import { Button, Carousel } from "react-bootstrap";
 import { Nav, Navbar, Form, NavDropdown, FormControl } from "react-bootstrap";
+import Pagination from "react-js-pagination";
+import InputRange from 'react-input-range';
+
 
 
 
@@ -15,28 +17,40 @@ import { Nav, Navbar, Form, NavDropdown, FormControl } from "react-bootstrap";
 const apikey = process.env.REACT_APP_APIKEY
 export default function App() {
     let [movieList, setMovieList] = useState(null)
-   
+    let [originList, setOriginList] = useState(null)
+    let [activePage, setActivePage] = useState(1)
 
-    const callMovie = async () => {
-        let url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apikey}&language=en-US&page=1`
+
+    const callMovie = async (page) => {
+        let url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apikey}&language=en-US&page=${page}`
         let result = await fetch(url)
         let data = await result.json()
         console.log("data", data)
-
+        setOriginList(data.results)
         setMovieList(data.results)
     }
 
+    function searchByKeyword(keySearch) {
+        let filterMovie = originList.filter((movie) =>
+            movie.title.includes(keySearch.target.value));
 
-    let searchByKeyword = (keysearch) => {
-
-
-
+        setMovieList(filterMovie)
 
     }
+
+    function loadMore(numPage) {
+        callMovie(numPage)
+        setActivePage(numPage)
+    }
+
+
+
 
     useEffect(() => {
         callMovie()
     }, [])
+
+
 
     if (movieList == null) {
         return (
@@ -45,8 +59,9 @@ export default function App() {
     }
 
     return (
-        <div>
-            <h1 className="row justify-content-center text-center">Nguyen Cinema</h1>
+        <div className = "body-bg">
+            <h1 className="row justify-content-center text-center style-title">Nguyen Cinema</h1>
+            <div>
             <Navbar bg="light" expand="lg">
                 <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -63,11 +78,12 @@ export default function App() {
                         </NavDropdown>
                     </Nav>
                     <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={(keysearch) => searchByKeyword(keysearch)} />
+                        <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={(keySearch) => searchByKeyword(keySearch)} />
                         <Button variant="outline-success">Search</Button>
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
+            </div>
             <div className="container-fluid  my-auto">
                 <div className="container mx-auto my-4 py-4">
                     <div className="row justify-content-center text-center">
@@ -76,11 +92,29 @@ export default function App() {
                                 return (<MovieCard movie={item} />)
                             })}
                             <MovieBoard movieList={movieList} />
+                            {movieList.map(item => {
+                                return (<Carousel movie={item} />)
+                            })}
+        
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div>
+                <Pagination
+                    activePage={activePage}
+                    itemsCountPerPage={10}
+                    totalItemsCount={450}
+                    pageRangeDisplayed={5}
+                    onChange={(numPage) => loadMore(numPage)}
+                    itemClass="page-item"
+                    linkClass="page-link"
+                />
+            </div>
         </div>
-    );
+
+    )
 }
+
 
