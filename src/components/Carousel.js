@@ -1,6 +1,6 @@
 import React from 'react'
 import Carousel from 'react-bootstrap/Carousel';
-export default function MovieCard(props) {
+export default function Carousel(props) {
     let movie = props.movie
     return (
         <div>

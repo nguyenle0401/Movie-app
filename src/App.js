@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Carousel } from "react-bootstrap";
 import { Nav, Navbar, Form, NavDropdown, FormControl } from "react-bootstrap";
 import Pagination from "react-js-pagination";
-import InputRange from 'react-input-range';
+
 
 
 
@@ -62,19 +62,16 @@ export default function App() {
         <div className = "body-bg">
             <h1 className="row justify-content-center text-center style-title">Nguyen Cinema</h1>
             <div>
-            <Navbar bg="light" expand="lg">
+            <Navbar bg="light" expand="lg" >
                 <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="#home">Home</Nav.Link>
                         <Nav.Link href="#link">Link</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                        <NavDropdown title="Sort by Rating " id="basic-nav-dropdown">
+                            <NavDropdown.Item href="#action/3.1">Heigth to Low</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.2">Low to Height</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     <Form inline>
@@ -92,9 +89,6 @@ export default function App() {
                                 return (<MovieCard movie={item} />)
                             })}
                             <MovieBoard movieList={movieList} />
-                            {movieList.map(item => {
-                                return (<Carousel movie={item} />)
-                            })}
         
                         </div>
                     </div>
