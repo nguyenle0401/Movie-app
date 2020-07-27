@@ -10,6 +10,7 @@ import { Nav, Navbar, Form, NavDropdown, FormControl } from "react-bootstrap";
 import Pagination from "react-js-pagination";
 import Range from './components/Range'
 import CircleLoader from "react-spinners/CircleLoader";
+import { css } from "@emotion/core";
 
 
 
@@ -107,19 +108,29 @@ export default function App() {
 
 
     //
+    const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
     if (movieList == null) {
         return (
-            <h2>Loading...</h2>
+            <div className="sweet-loading style-loading">
+            <CircleLoader
+              css={override}
+              size={150}
+              color={"green"}
+            />
+          </div>
         )
     }
 
     return (
         <div className="body-bg">
-
             <div className="header-fixed" >
-                <h1 className="row justify-content-center text-center style-title">Nguyen Cinema</h1>
+                <h1 className=" justify-content-center text-center style-title">NGUYEN CINEMA</h1>
                 <Navbar bg="light" expand="lg" >
-                    <Navbar.Brand href="#home" >React-Bootstrap</Navbar.Brand>
+                    <Navbar.Brand href="#home" >Home</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto ">
@@ -138,7 +149,7 @@ export default function App() {
                         </Nav>
                         <Form inline>
                             <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={(keySearch) => searchByKeyword(keySearch)} />
-                            <Button variant="outline-success">Search</Button>
+                            <Button variant="success">Search</Button>
                         </Form>
                     </Navbar.Collapse>
                 </Navbar>
@@ -147,17 +158,13 @@ export default function App() {
                 <div className="container mx-auto my-4 py-4">
                     <div className="row justify-content-center text-center">
                         <div>
-                            {/* {movieList.map(item => {
-                                return (<MovieCard movie={item} />)
-                            })} */}
-                            <MovieBoard movieList={movieList} />
-
+                            <MovieBoard movieList={movieList}/>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div>
+            <div className = "row justify-content-center text-center">
                 <Pagination
                     activePage={activePage}
                     itemsCountPerPage={10}
