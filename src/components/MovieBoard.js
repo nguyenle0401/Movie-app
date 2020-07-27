@@ -5,7 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 export default function MovieBoard(props) {
   let movieList = props.movieList;
   if (movieList.length === 0) return null;
-  const colsInOneRows = 2;
+  const colsInOneRows = 4;
   let numberOfRows = Math.floor(movieList.length / colsInOneRows);
   if (movieList.length % colsInOneRows !== 0) numberOfRows++;
   console.log(numberOfRows)
