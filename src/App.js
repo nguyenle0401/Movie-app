@@ -138,11 +138,8 @@ export default function App() {
   return (
     <div className="body-bg">
       <div className="header-fixed">
-        <h1 className=" justify-content-center text-center style-title">
-          NGUYEN CINEMA
-        </h1>
-        <Navbar bg="light" expand="lg">
-          <Navbar.Brand href="#home">Home</Navbar.Brand>
+        <Navbar bg="warning" expand="lg">
+          <Navbar.Brand href="#home" className = "style-title">Nguyen Xine</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto dflex justify-center">
@@ -205,7 +202,7 @@ export default function App() {
       </div>
       <div
         className="container-fluid  my-auto"
-        style={{ "padding-top": "200px", top: "200px" }}
+        style={{ "padding-top": "100px", top: "200px" }}
       >
         {/* <div style={{"display": "flex", 'justifyContent': 'space-between'}}> */}
         <FilterBoard

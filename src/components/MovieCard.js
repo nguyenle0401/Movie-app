@@ -19,7 +19,7 @@ export default function MovieCard(props) {
                 <h3 className="col-12 color-2 pb-2 style-average">{movie.vote_average}</h3>
                 <h3 className="col-12 color-2 pb-2 style-date">{movie.release_date}</h3>
                 </div>
-                <Button variant="success">Overview</Button>
+                <Button variant="success">View trailer</Button>
 
             </div>
         </Card>
