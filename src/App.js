@@ -21,7 +21,8 @@ export default function App() {
   let [activePage, setActivePage] = useState(1);
   let [year, setYear] = useState({ min: 1980, max: 2020 });
   let [rating, setRating] = useState({ min: 0, max: 10 });
-
+  let [totalResult, setTotalResult] = useState(0);
+  let [genres, setGenres] = useState(null);
   const callMovies = async (page) => {
     let url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apikey}&language=en-US&page=${page}`;
     let result = await fetch(url);
@@ -29,16 +30,28 @@ export default function App() {
     console.log("data", data);
     setOriginList(data.results);
     setMovieList(data.results);
+    setTotalResult(data.total_results);
   };
 
-  const callTopRateMovies = async (page) => {
-    let url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apikey}&language=en-US&page=${page}`;
+  const callTopRateMovies = async () => {
+    let url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apikey}&language=en-US&page=${activePage}`;
     let result = await fetch(url);
     let data = await result.json();
     console.log("data", data);
     setOriginList(data.results);
     setMovieList(data.results);
+    setTotalResult(data.total_results);
   };
+  //Genres
+  const getGenres = async () => {
+    let url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apikey}&language=en-US`;
+    let result = await fetch(url);
+    let data = await result.json();
+    setGenres(data.genres);
+    console.log("Data ne", data);
+    callTopRateMovies();
+  };
+
   //Search by keyword
   function searchByKeyword(keySearch) {
     let filterMovie = originList.filter((movie) =>
@@ -98,13 +111,14 @@ export default function App() {
   }
 
   //Range Rating
-  const filterByRate  = (value) => {
+  const filterByRate = (value) => {
     let filteredList = originList.filter(
-      (movie) => movie.vote_average > value.min && movie.vote_average < value.max
-    )
-    setRating(value)
-    setMovieList(filteredList)
-  }
+      (movie) =>
+        movie.vote_average > value.min && movie.vote_average < value.max
+    );
+    setRating(value);
+    setMovieList(filteredList);
+  };
   //Range Year
   const filterByYear = (value) => {
     let filteredList = originList.filter((movie) => {
@@ -118,7 +132,7 @@ export default function App() {
   //
 
   useEffect(() => {
-    callMovies();
+    getGenres();
   }, []);
 
   //
@@ -139,7 +153,9 @@ export default function App() {
     <div className="body-bg">
       <div className="header-fixed">
         <Navbar bg="warning" expand="lg">
-          <Navbar.Brand href="#home" className = "style-title">Nguyen Xine</Navbar.Brand>
+          <Navbar.Brand href="#home" className="style-title">
+            Nguyen Xine
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto dflex justify-center">
@@ -211,12 +227,12 @@ export default function App() {
           year={year}
           rating={rating}
         />
+
         {/* </div> */}
         <div className="container mx-auto my-4 py-4">
           <div className="row justify-content-center text-center">
             <div>
-              <MovieBoard movieList={movieList} />
-              {console.log("fgf", movieList)}
+              <MovieBoard movieList={movieList} genres={genres} />
             </div>
           </div>
         </div>
@@ -224,13 +240,13 @@ export default function App() {
       <div className="row justify-content-center text-center">
         <Pagination
           activePage={activePage}
-          itemsCountPerPage={10}
-          totalItemsCount={450}
+          itemsCountPerPage={20}
+          totalItemsCount={totalResult}
           pageRangeDisplayed={5}
           onChange={(numPage) => loadMore(numPage)}
           itemClass="page-item"
           linkClass="page-link"
-        />
+        ></Pagination>
       </div>
     </div>
   );
