@@ -8,8 +8,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Carousel } from "react-bootstrap";
 import { Nav, Navbar, Form, NavDropdown, FormControl } from "react-bootstrap";
 import Pagination from "react-js-pagination";
-import Range from './components/Range'
-import CircleLoader from "react-spinners/CircleLoader";
+// import Range from './components/Range'
+import Slider from "./components/Slider"
+
+// import CircleLoader from "react-spinners/CircleLoader";
 
 
 
@@ -122,7 +124,7 @@ export default function App() {
                     <Navbar.Brand href="#home" >React-Bootstrap</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto ">
+                        <Nav className="mr-auto dflex justify-center">
                             <NavDropdown title="Search by Source" id="basic-nav">
                                 <NavDropdown.Item href="#action/3.1" value="1" onClick={() => nowPlaying()} >Currently Playing</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2" value="2" onClick={() => topRated()}>Top Rated</NavDropdown.Item>
@@ -135,6 +137,7 @@ export default function App() {
                                 <NavDropdown.Item href="#action/3.1" onClick={() => highToLow()} >High to Low</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2" onClick={() => lowToHigh()} >Low to High</NavDropdown.Item>
                             </NavDropdown>
+
                         </Nav>
                         <Form inline>
                             <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={(keySearch) => searchByKeyword(keySearch)} />
@@ -144,6 +147,9 @@ export default function App() {
                 </Navbar>
             </div>
             <div className="container-fluid  my-auto" style={{ "padding-top": "200px", "top": "200px" }}>
+            <div style={{"display": "flex", 'justifyContent': 'space-between'}}>
+                <div><Slider name="Years"></Slider></div>
+                 <div><Slider name="Rating" color="primary"></Slider></div></div>
                 <div className="container mx-auto my-4 py-4">
                     <div className="row justify-content-center text-center">
                         <div>
