@@ -10,7 +10,7 @@ export default function MovieBoard(props) {
   if (movieList.length % colsInOneRows !== 0) numberOfRows++;
   console.log(numberOfRows)
   var rowsArray = Array.from(Array(numberOfRows).keys())
-  console.log("ahhadf")
+ 
   return (
     <Container fluid>
       {

@@ -6,6 +6,7 @@ import { Button } from "react-bootstrap";
 
 export default function MovieCard(props) {
     let movie = props.movie
+    if (!movie) return <div></div>
     return (
 <div className = "style-card">
 
