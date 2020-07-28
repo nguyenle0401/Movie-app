@@ -1,51 +1,68 @@
-.style-title-card{
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.style-title-card {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-weight: bold;
 }
 
-.style-title{
+.style-title {
   font-size: 20px;
   font-weight: bolder;
-  font-family:Cambria;
+  font-family: Cambria;
   color: rgb(25, 172, 230);
- 
 }
-.style.nav{
-  background-color: black
+.style.nav {
+  background-color: black;
 }
 
-.body-bg{
+.body-bg {
   background-color: rgb(3, 5, 5);
 }
 .header-fixed {
   position: fixed !important;
-  width:100%;
+  width: 100%;
   z-index: 10;
-  
+
   /* top: 0px; display:none;
   background-color:white; */
 }
-.style-loading{
+.style-loading {
   display: flex;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height:100%;
+  height: 100%;
   align-items: center;
   justify-content: center;
   font-weight: bolder;
 }
-.style-movie{
- font-size: 30px;
- font-weight: bold;
+.style-movie {
+  font-size: 30px;
+  font-weight: bold;
 }
-.style-date{
+.style-date {
   font-size: 20px;
 }
-.style-average{
+.style-average {
   font-size: 20px;
   color: red;
   font-weight: bold;
 }
 
+/* .modalzz {
+  height: 50vh;
+  width: 50vw;
+} */
+.modal-content {
+  height: 50vh;
+  width: 50vw;
+}
+
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}

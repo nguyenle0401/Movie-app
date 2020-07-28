@@ -5,6 +5,7 @@ import "./App.css";
 import MovieCard from "./components/MovieCard";
 import FilterBoard from "./components/FilterBoard";
 import MovieBoard from "./components/MovieBoard";
+import Trailer from "./components/Trailer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Carousel } from "react-bootstrap";
 import { Nav, Navbar, Form, NavDropdown, FormControl } from "react-bootstrap";
@@ -23,6 +24,19 @@ export default function App() {
   let [rating, setRating] = useState({ min: 0, max: 10 });
   let [totalResult, setTotalResult] = useState(0);
   let [genres, setGenres] = useState(null);
+//   
+//   const [youtubeLink, setYoutubeLink] = useState(null);
+
+
+  //Trailer
+//   const callApiGetVideo = async () => {
+//     let url = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=938008e9b9bfe4ec58d30e7abcbaa49e&language=en-US&append_to_response=videos`
+//     let respone = await fetch(url)
+//     let data = await respone.json()
+//     if (data.videos.results.length > 0) {
+//         setYoutubeLink(data.videos.results[0].key)
+//     }
+
   const callMovies = async (page) => {
     let url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apikey}&language=en-US&page=${page}`;
     let result = await fetch(url);
@@ -227,7 +241,6 @@ export default function App() {
           year={year}
           rating={rating}
         />
-
         {/* </div> */}
         <div className="container mx-auto my-4 py-4">
           <div className="row justify-content-center text-center">
@@ -250,4 +263,5 @@ export default function App() {
       </div>
     </div>
   );
-}
+};
+

@@ -1,8 +1,27 @@
-import React from "react";
-import { Card, ListGroupItem, Badge } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+
+import { Modal, Card, ListGroupItem, Badge } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+// import Trailer from "./Trailer";
 
 export default function MovieCard({ movie, genres }) {
+  const apikey = process.env.REACT_APP_APIKEY;
+  // let movie = props.movie
+  const [lgShow, setLgShow] = useState(false);
+  const [youtubeLink, setYoutubeLink] = useState(null);
+  const callApiGetVideo = async () => {
+    let url = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apikey}&language=en-US&append_to_response=videos`;
+    let respone = await fetch(url);
+    let data = await respone.json();
+    if (data.videos.results.length > 0) {
+      setYoutubeLink(data.videos.results[0].key);
+    }
+    console.log(data);
+  };
+  const showModal = () => {
+    callApiGetVideo();
+    setLgShow(true);
+  };
   // let movie = props.movie
   if (!movie || !genres) return <div></div>;
   return (
@@ -34,7 +53,22 @@ export default function MovieCard({ movie, genres }) {
               })}
             </ListGroupItem>
           </div>
-          <Button variant="success">View trailer</Button>
+          <Button variant="success" onClick={() => showModal()}>
+            Watch Trailer
+          </Button>
+          <Modal
+            // className="myVideo"
+            // size="xl"
+            dialogClassName="modalzz"
+            show={lgShow}
+            onHide={() => setLgShow(false)}
+            aria-labelledby="example-modal-sizes-title-lg"
+          >
+            <iframe
+              className="responsive-iframe"
+              src={`https://www.youtube.com/embed/${youtubeLink}`}
+            ></iframe>
+          </Modal>
         </div>
       </Card>
     </div>
